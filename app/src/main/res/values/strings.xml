@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ShiftTestTask</string>
+    <string name="applyButtonName">Apply Button</string>
+    <string name="backButtonName">Back Button</string>
 </resources>
