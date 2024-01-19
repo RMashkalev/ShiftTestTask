@@ -1,5 +1,25 @@
 <resources>
     <string name="app_name">ShiftTestTask</string>
-    <string name="applyButtonName">Apply Button</string>
-    <string name="backButtonName">Back Button</string>
+
+    <string name="name">Name</string>
+    <string name="nameHint">John</string>
+    <string name="surname">Surname</string>
+    <string name="surnameHint">Doe</string>
+    <string name="birthday">Birthday</string>
+    <string name="birthdayHint">dd-mm-yyyy</string>
+    <string name="firstPassword">Password</string>
+    <string name="passwordHint">********</string>
+    <string name="secondPassword">Repeat\npassword</string>
+    <string name="registrationButton">Registration</string>
+    <string name="startLogoDescription">This is start logo</string>
+    <string name="userLogoDescription">This is user logo</string>
+    <string name="negative_name">The length of the name must be\n 2 or more characters\n and consist only of letters</string>
+    <string name="negative_birthday">Input correct birthday</string>
+    <string name="negative_first_password">The password must be:\n Consist of at least 8 characters\n Contain at least one letter and number\n Contain at least one special character\n Not contain spaces </string>
+    <string name="negative_second_password">Passwords don\'t match</string>
+    <string name="applyButtonName">Apply</string>
+
+    <string name="greetingButtonName">Greeting</string>
+    <string name="greetingMessage">Welcome</string>
+    <string name="exitButtonName">Exit</string>
 </resources>

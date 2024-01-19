@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_font_size">20sp</dimen>
+    <dimen name="error_message_margin">20sp</dimen>
+    <dimen name="edittext_font_size">20sp</dimen>
+    <dimen name="birthday_margin">10sp</dimen>
+</resources>
