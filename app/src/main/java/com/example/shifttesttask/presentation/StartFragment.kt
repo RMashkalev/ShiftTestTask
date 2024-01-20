@@ -8,18 +8,30 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.example.shifttesttask.R
 import com.example.shifttesttask.databinding.FragmentStartBinding
+import com.example.shifttesttask.domain.models.UserDataModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StartFragment : Fragment() {
 
     private lateinit var fragmentBinding : FragmentStartBinding
 
+    private val vm: RegistrationViewModel by viewModel<RegistrationViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         fragmentBinding = FragmentStartBinding.inflate(layoutInflater)
 
         fragmentBinding.applyButton.setOnClickListener {
+            val userData = UserDataModel(
+                userName = fragmentBinding.inputName.toString(),
+                userSurname = fragmentBinding.inputSurname.toString(),
+                userPassword = fragmentBinding.inputFirstPassword.toString())
+
+            vm.saveUserData(userData)
+
             fragmentBinding.root.findNavController().navigate(R.id.action_startFragment_to_mainFragment)
         }
 
