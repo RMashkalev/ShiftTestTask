@@ -21,4 +21,12 @@ class UserDataRepositoryImplementation(
         return userDataStorage.loadGreetingData()
     }
 
+    override fun checkRememberData(): Boolean {
+        return userDataStorage.checkRememberData()
+    }
+
+    override fun clearRememberUserData() {
+        userDataStorage.clearRememberData()
+    }
+
 }

@@ -8,13 +8,15 @@ import org.koin.dsl.module
 val appModule = module {
     viewModel<RegistrationViewModel> {
         RegistrationViewModel(
-            userRegistrationUseCase = get()
+            userRegistrationUseCase = get(),
+            checkRememberUserDataUseCase = get()
         )
     }
 
     viewModel<MainViewModel> {
         MainViewModel(
-            userGreetingUseCase = get()
+            userGreetingUseCase = get(),
+            clearRememberUserDataUseCase = get()
         )
     }
 }

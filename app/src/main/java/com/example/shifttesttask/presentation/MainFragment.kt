@@ -32,11 +32,10 @@ class MainFragment : Fragment() {
         }
 
         fragmentBinding.backButton.setOnClickListener {
+            vm.clearRememberUserData()
             fragmentBinding.root.findNavController().navigate(R.id.action_mainFragment_to_startFragment)
         }
 
         return fragmentBinding.root
     }
-
-
 }

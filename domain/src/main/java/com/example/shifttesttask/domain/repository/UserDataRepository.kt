@@ -7,4 +7,8 @@ interface UserDataRepository {
     fun saveData(userData: UserDataModel)
 
     fun loadGreetingData() : GreetingUserDataModel
+
+    fun checkRememberData() : Boolean
+
+    fun clearRememberUserData()
 }

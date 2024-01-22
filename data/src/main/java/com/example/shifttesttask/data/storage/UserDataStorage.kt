@@ -8,4 +8,8 @@ interface UserDataStorage {
     fun saveData(userData: SaveUserDataModel)
 
     fun loadGreetingData() : GreetingUserDataModel
+
+    fun checkRememberData() : Boolean
+
+    fun clearRememberData()
 }

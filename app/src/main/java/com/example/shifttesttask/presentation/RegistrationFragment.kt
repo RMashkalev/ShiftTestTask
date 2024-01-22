@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.shifttesttask.R
 import com.example.shifttesttask.databinding.FragmentStartBinding
 import com.example.shifttesttask.domain.models.UserDataModel
 import com.example.shifttesttask.viewmodels.RegistrationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class StartFragment : Fragment() {
+class RegistrationFragment : Fragment() {
 
     private lateinit var fragmentBinding : FragmentStartBinding
 
@@ -23,6 +24,11 @@ class StartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         fragmentBinding = FragmentStartBinding.inflate(layoutInflater, container, false)
+
+        if (vm.checkRememberUserData()) {
+            val navController = NavHostFragment.findNavController(this)
+            navController.navigate(R.id.action_startFragment_to_mainFragment)
+        }
 
         fragmentBinding.applyButton.setOnClickListener {
             val userData = UserDataModel(

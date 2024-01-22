@@ -26,4 +26,12 @@ class SharedPrefStorage(context: Context) : UserDataStorage {
         val userSurname = sharedPreferences.getString(KEY_USER_SURNAME, "") ?: ""
         return GreetingUserDataModel(userName = userName, userSurname = userSurname)
     }
+
+    override fun checkRememberData(): Boolean {
+        return sharedPreferences.contains(KEY_USER_NAME) && sharedPreferences.contains(KEY_USER_PASSWORD)
+    }
+
+    override fun clearRememberData() {
+        sharedPreferences.edit().clear().apply()
+    }
 }
