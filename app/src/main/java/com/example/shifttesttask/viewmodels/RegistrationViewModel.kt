@@ -1,4 +1,4 @@
-package com.example.shifttesttask.presentation
+package com.example.shifttesttask.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.example.shifttesttask.domain.models.UserDataModel

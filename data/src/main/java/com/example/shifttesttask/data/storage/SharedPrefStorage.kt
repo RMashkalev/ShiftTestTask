@@ -2,6 +2,7 @@ package com.example.shifttesttask.data.storage
 
 import android.content.Context
 import com.example.shifttesttask.data.models.SaveUserDataModel
+import com.example.shifttesttask.domain.models.GreetingUserDataModel
 
 private const val SHARED_PREFS_NAME = "shared_prefs_name"
 private const val KEY_USER_NAME = "name"
@@ -17,5 +18,12 @@ class SharedPrefStorage(context: Context) : UserDataStorage {
         sharedPreferences.edit().putString(KEY_USER_NAME, userData.userName).apply()
         sharedPreferences.edit().putString(KEY_USER_SURNAME, userData.userSurname).apply()
         sharedPreferences.edit().putString(KEY_USER_PASSWORD, userData.userPassword).apply()
+        println(userData.userName)
+    }
+
+    override fun loadGreetingData(): GreetingUserDataModel {
+        val userName = sharedPreferences.getString(KEY_USER_NAME, "") ?: ""
+        val userSurname = sharedPreferences.getString(KEY_USER_SURNAME, "") ?: ""
+        return GreetingUserDataModel(userName = userName, userSurname = userSurname)
     }
 }

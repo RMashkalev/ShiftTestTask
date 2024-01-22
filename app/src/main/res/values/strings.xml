@@ -20,6 +20,9 @@
     <string name="applyButtonName">Apply</string>
 
     <string name="greetingButtonName">Greeting</string>
-    <string name="greetingMessage">Welcome</string>
+    <string name="greetingTitle">Welcome!</string>
+    <string name="greetingBody">Welcome aboard</string>
     <string name="exitButtonName">Exit</string>
+
+
 </resources>
