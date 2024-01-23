@@ -15,15 +15,14 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.shifttesttask.R
 import com.example.shifttesttask.databinding.FragmentRegistrationBinding
 import com.example.shifttesttask.domain.models.UserDataModel
+import com.example.shifttesttask.domain.usecase.NAME_CHECK
+import com.example.shifttesttask.domain.usecase.PASSWORD_CHECK
+import com.example.shifttesttask.domain.usecase.SECOND_PASSWORD_CHECK
+import com.example.shifttesttask.domain.usecase.SURNAME_CHECK
 import com.example.shifttesttask.viewmodels.RegistrationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
-
-private const val NAME_CHECK = 0
-private const val SURNAME_CHECK = 1
-private const val PASSWORD_CHECK = 2
-private const val SECOND_PASSWORD_CHECK = 3
 
 class RegistrationFragment : Fragment() {
 
@@ -36,9 +35,12 @@ class RegistrationFragment : Fragment() {
     ): View {
         fragmentBinding = FragmentRegistrationBinding.inflate(layoutInflater, container, false)
 
-        if (vm.checkRememberUserData()) {
-            val navController = NavHostFragment.findNavController(this)
-            navController.navigate(R.id.action_startFragment_to_mainFragment)
+        vm.checkRememberUserData()
+        vm.dataSaved.observe(viewLifecycleOwner) { dataSaved ->
+            if (dataSaved) {
+                val navController = NavHostFragment.findNavController(this)
+                navController.navigate(R.id.action_startFragment_to_mainFragment)
+            }
         }
 
         setListener(editText = fragmentBinding.inputName, NAME_CHECK)

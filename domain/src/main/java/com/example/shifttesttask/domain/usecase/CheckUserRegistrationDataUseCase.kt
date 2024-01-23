@@ -5,11 +5,11 @@ import java.time.Duration
 import java.util.Date
 import java.util.Locale
 
-private const val NAME_CHECK = 0
-private const val SURNAME_CHECK = 1
-private const val PASSWORD_CHECK = 2
-private const val SECOND_PASSWORD_CHECK = 3
-private const val BIRTHDAY_CHECK = 4
+const val NAME_CHECK = 0
+const val SURNAME_CHECK = 1
+const val PASSWORD_CHECK = 2
+const val SECOND_PASSWORD_CHECK = 3
+const val BIRTHDAY_CHECK = 4
 
 private const val DAYS_IN_18_YEARS = 6574
 
@@ -37,7 +37,7 @@ class CheckUserRegistrationDataUseCase() {
         if (data.filter { it.isLetter() }.firstOrNull { it.isUpperCase() } == null) return false
         if (data.filter { it.isLetter() }.firstOrNull { it.isLowerCase() } == null) return false
         if (data.filter { !it.isLetterOrDigit() }.firstOrNull() == null) return false
-
+        if (data.filter { it.isWhitespace() }.firstOrNull() != null) return false
         return true
     }
 

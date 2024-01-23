@@ -3,8 +3,13 @@ package com.example.shifttesttask.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.shifttesttask.domain.models.UserDataModel
+import com.example.shifttesttask.domain.usecase.BIRTHDAY_CHECK
 import com.example.shifttesttask.domain.usecase.CheckRememberUserDataUseCase
 import com.example.shifttesttask.domain.usecase.CheckUserRegistrationDataUseCase
+import com.example.shifttesttask.domain.usecase.NAME_CHECK
+import com.example.shifttesttask.domain.usecase.PASSWORD_CHECK
+import com.example.shifttesttask.domain.usecase.SECOND_PASSWORD_CHECK
+import com.example.shifttesttask.domain.usecase.SURNAME_CHECK
 import com.example.shifttesttask.domain.usecase.UserRegistrationUseCase
 
 private const val NEUTRAL_STATUS = 0
@@ -14,18 +19,13 @@ private const val POSITIVE_STATUS = 1
 private const val BOOL_NEGATIVE_STATUS = false
 private const val BOOL_POSITIVE_STATUS = true
 
-private const val NAME_INPUT = 0
-private const val SURNAME_INPUT = 1
-private const val PASSWORD_INPUT = 2
-private const val SECOND_PASSWORD_INPUT = 3
-private const val BIRTHDAY_INPUT = 4
-
 
 class RegistrationViewModel(
     private val userRegistrationUseCase: UserRegistrationUseCase,
     private val checkRememberUserDataUseCase: CheckRememberUserDataUseCase,
     private val checkUserRegistrationDataUseCase: CheckUserRegistrationDataUseCase
 ) : ViewModel() {
+    val dataSaved = MutableLiveData<Boolean>(BOOL_NEGATIVE_STATUS)
 
     val nameInputStatus = MutableLiveData<Int>(NEUTRAL_STATUS)
     val surnameInputStatus = MutableLiveData<Int>(NEUTRAL_STATUS)
@@ -49,8 +49,8 @@ class RegistrationViewModel(
         userRegistrationUseCase.execute(userData = userData)
     }
 
-    fun checkRememberUserData(): Boolean {
-        return checkRememberUserDataUseCase.execute()
+    fun checkRememberUserData() {
+        dataSaved.value = checkRememberUserDataUseCase.execute()
     }
 
     fun checkInputUserData(data: String, id: Int) {
@@ -62,59 +62,59 @@ class RegistrationViewModel(
             )
         if (result) {
             when (id) {
-                NAME_INPUT -> {
+                NAME_CHECK -> {
                     nameInputStatus.value = POSITIVE_STATUS
                     nameErrorMessage.value = BOOL_POSITIVE_STATUS
-                    fieldsCheck[NAME_INPUT] = true
+                    fieldsCheck[NAME_CHECK] = true
                 }
 
-                SURNAME_INPUT -> {
+                SURNAME_CHECK -> {
                     surnameInputStatus.value = POSITIVE_STATUS
                     surnameErrorMessage.value = BOOL_POSITIVE_STATUS
-                    fieldsCheck[SURNAME_INPUT] = true
+                    fieldsCheck[SURNAME_CHECK] = true
                 }
 
-                PASSWORD_INPUT -> {
+                PASSWORD_CHECK -> {
                     passwordInputStatus.value = POSITIVE_STATUS
                     passwordErrorMessage.value = BOOL_POSITIVE_STATUS
                     firstPassword = data
-                    checkInputUserData(data = secondPassword, id = SECOND_PASSWORD_INPUT)
-                    fieldsCheck[PASSWORD_INPUT] = true
+                    checkInputUserData(data = secondPassword, id = SECOND_PASSWORD_CHECK)
+                    fieldsCheck[PASSWORD_CHECK] = true
                 }
 
-                SECOND_PASSWORD_INPUT -> {
+                SECOND_PASSWORD_CHECK -> {
                     secondPasswordInputStatus.value = POSITIVE_STATUS
                     secondPasswordErrorMessage.value = BOOL_POSITIVE_STATUS
                     secondPassword = data
-                    fieldsCheck[SECOND_PASSWORD_INPUT] = true
+                    fieldsCheck[SECOND_PASSWORD_CHECK] = true
                 }
             }
         } else {
             when (id) {
-                NAME_INPUT -> {
+                NAME_CHECK -> {
                     nameInputStatus.value = NEGATIVE_STATUS
                     nameErrorMessage.value = BOOL_NEGATIVE_STATUS
-                    fieldsCheck[NAME_INPUT] = false
+                    fieldsCheck[NAME_CHECK] = false
                 }
 
-                SURNAME_INPUT -> {
+                SURNAME_CHECK -> {
                     surnameInputStatus.value = NEGATIVE_STATUS
                     surnameErrorMessage.value = BOOL_NEGATIVE_STATUS
-                    fieldsCheck[SURNAME_INPUT] = false
+                    fieldsCheck[SURNAME_CHECK] = false
                 }
 
-                PASSWORD_INPUT -> {
+                PASSWORD_CHECK -> {
                     passwordInputStatus.value = NEGATIVE_STATUS
                     passwordErrorMessage.value = BOOL_NEGATIVE_STATUS
                     firstPassword = data
-                    checkInputUserData(data = secondPassword, id = SECOND_PASSWORD_INPUT)
-                    fieldsCheck[PASSWORD_INPUT] = false
+                    checkInputUserData(data = secondPassword, id = SECOND_PASSWORD_CHECK)
+                    fieldsCheck[PASSWORD_CHECK] = false
                 }
 
-                SECOND_PASSWORD_INPUT -> {
+                SECOND_PASSWORD_CHECK -> {
                     secondPasswordInputStatus.value = NEGATIVE_STATUS
                     secondPasswordErrorMessage.value = BOOL_NEGATIVE_STATUS
-                    fieldsCheck[SECOND_PASSWORD_INPUT] = false
+                    fieldsCheck[SECOND_PASSWORD_CHECK] = false
                 }
             }
         }
@@ -137,17 +137,17 @@ class RegistrationViewModel(
         val result =
             checkUserRegistrationDataUseCase.execute(
                 data = birthday,
-                id = BIRTHDAY_INPUT,
+                id = BIRTHDAY_CHECK,
                 firstPassword = firstPassword
             )
         if (result) {
             birthdayInputStatus.value = POSITIVE_STATUS
             birthdayErrorMessage.value = BOOL_POSITIVE_STATUS
-            fieldsCheck[BIRTHDAY_INPUT] = true
+            fieldsCheck[BIRTHDAY_CHECK] = true
         } else {
             birthdayInputStatus.value = NEGATIVE_STATUS
             birthdayErrorMessage.value = BOOL_NEGATIVE_STATUS
-            fieldsCheck[BIRTHDAY_INPUT] = false
+            fieldsCheck[BIRTHDAY_CHECK] = false
         }
     }
 }
