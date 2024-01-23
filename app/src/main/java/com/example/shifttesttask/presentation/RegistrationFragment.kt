@@ -1,5 +1,7 @@
 package com.example.shifttesttask.presentation
 
+import android.app.DatePickerDialog
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,6 +17,8 @@ import com.example.shifttesttask.databinding.FragmentRegistrationBinding
 import com.example.shifttesttask.domain.models.UserDataModel
 import com.example.shifttesttask.viewmodels.RegistrationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 private const val NAME_CHECK = 0
 private const val SURNAME_CHECK = 1
@@ -24,7 +28,6 @@ private const val SECOND_PASSWORD_CHECK = 3
 class RegistrationFragment : Fragment() {
 
     private lateinit var fragmentBinding: FragmentRegistrationBinding
-
     private val vm: RegistrationViewModel by viewModel<RegistrationViewModel>()
 
     override fun onCreateView(
@@ -55,6 +58,10 @@ class RegistrationFragment : Fragment() {
         vm.secondPasswordInputStatus.observe(viewLifecycleOwner) {
             setInputStatus(fragmentBinding.inputSecondPassword, it)
         }
+        vm.birthdayInputStatus.observe(viewLifecycleOwner) {
+            setInputStatus(fragmentBinding.inputBirthday, it)
+        }
+
 
         vm.nameErrorMessage.observe(viewLifecycleOwner) {
             if (it) {
@@ -86,6 +93,24 @@ class RegistrationFragment : Fragment() {
                     getString(R.string.secondPasswordErrorMessage)
             }
         }
+        vm.birthdayErrorMessage.observe(viewLifecycleOwner) {
+            if (it) {
+                fragmentBinding.birthdayErrorMessage.text = ""
+            } else {
+                fragmentBinding.birthdayErrorMessage.text =
+                    getString(R.string.birthdayErrorMessage)
+            }
+        }
+
+        fragmentBinding.inputBirthday.setOnClickListener {
+            showDatePickerDialog()
+        }
+
+        vm.userBirthday.observe(viewLifecycleOwner) {
+            fragmentBinding.inputBirthday.setText(it)
+            if (it != "")
+                vm.checkBirthday(birthday = it)
+        }
 
         fragmentBinding.applyButton.setOnClickListener {
             vm.resultCheck()
@@ -94,7 +119,8 @@ class RegistrationFragment : Fragment() {
                     val userData = UserDataModel(
                         userName = fragmentBinding.inputName.text.toString(),
                         userSurname = fragmentBinding.inputSurname.text.toString(),
-                        userPassword = fragmentBinding.inputFirstPassword.text.toString()
+                        userPassword = fragmentBinding.inputFirstPassword.text.toString(),
+                        userBirthday = fragmentBinding.inputBirthday.text.toString()
                     )
                     vm.saveUserData(userData = userData)
 
@@ -132,5 +158,25 @@ class RegistrationFragment : Fragment() {
         }
     }
 
+    private fun showDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val datePickerDialog = activity?.let {
+            DatePickerDialog(
+                it,
+                { _, year, monthOfYear, dayOfMonth ->
+                    calendar.set(Calendar.YEAR, year)
+                    calendar.set(Calendar.MONTH, monthOfYear)
+                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
+                    val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+                    val formattedDate = dateFormat.format(calendar.time)
+                    vm.saveBirthday(formattedDate = formattedDate)
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
+        }
+        datePickerDialog?.show()
+    }
 }

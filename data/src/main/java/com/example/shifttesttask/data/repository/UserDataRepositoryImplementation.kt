@@ -13,7 +13,8 @@ class UserDataRepositoryImplementation(
         val saveUserData = SaveUserDataModel(
             userName = userData.userName,
             userSurname = userData.userSurname,
-            userPassword = userData.userPassword)
+            userPassword = userData.userPassword,
+            userBirthday = userData.userBirthday)
         userDataStorage.saveData(saveUserData)
     }
 

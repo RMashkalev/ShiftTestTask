@@ -103,22 +103,32 @@
             android:layout_height="wrap_content"
             android:text="@string/birthday"
             android:textSize="@dimen/text_font_size"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextText"
-            app:layout_constraintEnd_toStartOf="@+id/editTextText"
+            app:layout_constraintBottom_toBottomOf="@+id/inputBirthday"
+            app:layout_constraintEnd_toStartOf="@+id/inputBirthday"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/surnameErrorMessage" />
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/inputBirthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/neutral_edit_text_theme"
             android:ems="8"
             android:inputType="text"
             android:hint="@string/birthdayHint"
+            android:focusable="false"
             app:layout_constraintEnd_toEndOf="@+id/surnameErrorMessage"
             app:layout_constraintStart_toStartOf="@+id/surnameErrorMessage"
             app:layout_constraintTop_toBottomOf="@id/surnameErrorMessage" />
+
+        <TextView
+            android:id="@+id/birthdayErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="@+id/inputBirthday"
+            app:layout_constraintStart_toStartOf="@+id/inputBirthday"
+            app:layout_constraintTop_toBottomOf="@+id/inputBirthday" />
 
         <TextView
             android:id="@+id/textFirstPassword"
@@ -141,10 +151,9 @@
             android:hint="@string/passwordHint"
             android:inputType="textPassword"
             android:textSize="@dimen/edittext_font_size"
-            android:layout_marginTop="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextText"
-            app:layout_constraintStart_toStartOf="@+id/editTextText"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+            app:layout_constraintEnd_toEndOf="@+id/birthdayErrorMessage"
+            app:layout_constraintStart_toStartOf="@+id/birthdayErrorMessage"
+            app:layout_constraintTop_toBottomOf="@+id/birthdayErrorMessage" />
 
         <TextView
             android:id="@+id/firstPasswordErrorMessage"
@@ -200,6 +209,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/secondPasswordErrorMessage"/>
+
 
 
 

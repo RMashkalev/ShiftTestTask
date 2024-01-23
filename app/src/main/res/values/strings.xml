@@ -14,7 +14,7 @@
     <string name="startLogoDescription">This is start logo</string>
     <string name="userLogoDescription">This is user logo</string>
     <string name="nameErrorMessage">The length of the name must be\n 2 or more characters\n and consist only of letters</string>
-    <string name="birthdayErrorMessage">Input correct birthday</string>
+    <string name="birthdayErrorMessage">You must be at least 18 years old</string>
     <string name="firstPasswordErrorMessage">The password must be:\n Consist of at least 8 characters\n Contain at least one letter and number\n Contain at least one special character\n Not contain spaces </string>
     <string name="secondPasswordErrorMessage">Passwords don\'t match</string>
     <string name="applyButtonName">Apply</string>

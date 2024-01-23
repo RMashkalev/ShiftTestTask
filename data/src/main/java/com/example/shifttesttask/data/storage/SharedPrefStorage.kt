@@ -8,6 +8,7 @@ private const val SHARED_PREFS_NAME = "shared_prefs_name"
 private const val KEY_USER_NAME = "name"
 private const val KEY_USER_SURNAME = "surname"
 private const val KEY_USER_PASSWORD = "password"
+private const val KEY_USER_BIRTHDAY = "password"
 
 class SharedPrefStorage(context: Context) : UserDataStorage {
 
@@ -18,7 +19,7 @@ class SharedPrefStorage(context: Context) : UserDataStorage {
         sharedPreferences.edit().putString(KEY_USER_NAME, userData.userName).apply()
         sharedPreferences.edit().putString(KEY_USER_SURNAME, userData.userSurname).apply()
         sharedPreferences.edit().putString(KEY_USER_PASSWORD, userData.userPassword).apply()
-        println(userData.userName)
+        sharedPreferences.edit().putString(KEY_USER_BIRTHDAY, userData.userBirthday).apply()
     }
 
     override fun loadGreetingData(): GreetingUserDataModel {

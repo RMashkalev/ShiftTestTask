@@ -2,4 +2,5 @@ package com.example.shifttesttask.domain.models
 
 class UserDataModel(val userName: String,
                     val userSurname: String,
-                    val userPassword: String)
+                    val userPassword: String,
+                    val userBirthday: String)

@@ -18,6 +18,7 @@ private const val NAME_INPUT = 0
 private const val SURNAME_INPUT = 1
 private const val PASSWORD_INPUT = 2
 private const val SECOND_PASSWORD_INPUT = 3
+private const val BIRTHDAY_INPUT = 4
 
 
 class RegistrationViewModel(
@@ -28,15 +29,19 @@ class RegistrationViewModel(
 
     val nameInputStatus = MutableLiveData<Int>(NEUTRAL_STATUS)
     val surnameInputStatus = MutableLiveData<Int>(NEUTRAL_STATUS)
-//    val birthdayInputStatus = MutableLiveData<Int>(NEUTRAL_STATUS)
     val passwordInputStatus = MutableLiveData<Int>(NEUTRAL_STATUS)
     val secondPasswordInputStatus = MutableLiveData<Int>(NEUTRAL_STATUS)
-    val allChecksPassed = MutableLiveData<Boolean>()
+    val birthdayInputStatus = MutableLiveData<Int>(NEUTRAL_STATUS)
+
+    val allChecksPassed = MutableLiveData<Boolean>(BOOL_NEGATIVE_STATUS)
     var nameErrorMessage = MutableLiveData<Boolean>(BOOL_POSITIVE_STATUS)
     var surnameErrorMessage = MutableLiveData<Boolean>(BOOL_POSITIVE_STATUS)
     var passwordErrorMessage = MutableLiveData<Boolean>(BOOL_POSITIVE_STATUS)
     var secondPasswordErrorMessage = MutableLiveData<Boolean>(BOOL_POSITIVE_STATUS)
-    private val fieldsCheck = Array<Boolean>(4) { false }
+    var birthdayErrorMessage = MutableLiveData<Boolean>(BOOL_POSITIVE_STATUS)
+
+    var userBirthday = MutableLiveData<String>("")
+    private val fieldsCheck = Array<Boolean>(5) { false }
     private var firstPassword = ""
     private var secondPassword = ""
 
@@ -50,7 +55,11 @@ class RegistrationViewModel(
 
     fun checkInputUserData(data: String, id: Int) {
         val result =
-            checkUserRegistrationDataUseCase.execute(data = data, id = id, firstPassword = firstPassword)
+            checkUserRegistrationDataUseCase.execute(
+                data = data,
+                id = id,
+                firstPassword = firstPassword
+            )
         if (result) {
             when (id) {
                 NAME_INPUT -> {
@@ -118,5 +127,27 @@ class RegistrationViewModel(
             result = result && i
         }
         allChecksPassed.value = result
+    }
+
+    fun saveBirthday(formattedDate: String) {
+        userBirthday.value = formattedDate
+    }
+
+    fun checkBirthday(birthday: String) {
+        val result =
+            checkUserRegistrationDataUseCase.execute(
+                data = birthday,
+                id = BIRTHDAY_INPUT,
+                firstPassword = firstPassword
+            )
+        if (result) {
+            birthdayInputStatus.value = POSITIVE_STATUS
+            birthdayErrorMessage.value = BOOL_POSITIVE_STATUS
+            fieldsCheck[BIRTHDAY_INPUT] = true
+        } else {
+            birthdayInputStatus.value = NEGATIVE_STATUS
+            birthdayErrorMessage.value = BOOL_NEGATIVE_STATUS
+            fieldsCheck[BIRTHDAY_INPUT] = false
+        }
     }
 }
