@@ -29,6 +29,8 @@
 ## UseCase Диаграммы
 ![ShiftTestTask(app,domain,data)](https://github.com/RMashkalev/ShiftTestTask/assets/78581660/2ddb2993-f526-4108-9aa1-469b3735a634)
 
+![ShiftTestTaskUml](https://github.com/RMashkalev/ShiftTestTask/assets/78581660/4939a26e-ef2a-4597-8f08-61a61b010b87)
+
 ## Демонстрация работы
 ### Регистрация
 ![cfttesttask1](https://github.com/RMashkalev/ShiftTestTask/assets/78581660/0ad2c7a8-f28f-440b-8e96-87c0b7d574e1)
