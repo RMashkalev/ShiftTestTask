@@ -9,7 +9,7 @@
         android:id="@+id/startFragment"
         android:name="com.example.shifttesttask.presentation.RegistrationFragment"
         android:label="fragment_start"
-        tools:layout="@layout/fragment_start" >
+        tools:layout="@layout/fragment_registration" >
         <action
             android:id="@+id/action_startFragment_to_mainFragment"
             app:destination="@id/mainFragment" />

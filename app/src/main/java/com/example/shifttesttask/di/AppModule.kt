@@ -9,7 +9,8 @@ val appModule = module {
     viewModel<RegistrationViewModel> {
         RegistrationViewModel(
             userRegistrationUseCase = get(),
-            checkRememberUserDataUseCase = get()
+            checkRememberUserDataUseCase = get(),
+            checkUserRegistrationDataUseCase = get()
         )
     }
 

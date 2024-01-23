@@ -1,6 +1,7 @@
 package com.example.shifttesttask.di
 
 import com.example.shifttesttask.domain.usecase.CheckRememberUserDataUseCase
+import com.example.shifttesttask.domain.usecase.CheckUserRegistrationDataUseCase
 import com.example.shifttesttask.domain.usecase.ClearRememberUserDataUseCase
 import com.example.shifttesttask.domain.usecase.UserGreetingUseCase
 import com.example.shifttesttask.domain.usecase.UserRegistrationUseCase
@@ -21,5 +22,9 @@ val domainModule = module {
 
     factory<ClearRememberUserDataUseCase> {
         ClearRememberUserDataUseCase(userDataRepository = get())
+    }
+
+    factory<CheckUserRegistrationDataUseCase> {
+        CheckUserRegistrationDataUseCase()
     }
 }
